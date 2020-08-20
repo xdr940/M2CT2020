@@ -1,0 +1,14 @@
+# Default ignored files
+*.pdf
+*.blg
+*.aux
+*.log
+*.gz
+*.jpg
+*.png
+*.ini
+*.bbl
+*.out
+*.toc
+*.mp4
+

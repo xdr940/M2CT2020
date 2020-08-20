@@ -1,0 +1,22 @@
+%chapter03
+
+\section{模型建立与求解}
+
+
+\subsection{问题一的模型建立与求解}
+
+
+\subsection{问题二的模型建立与求解}
+
+根据问题一的求解, 已经得到环路, 现根据环路顺序, 对结点重新标号. 根据题干描述, 到整个系统稳定时, 充电车应在该环路循环跑动.
+
+设数据中心为$p_0$点, 设充电车对$p_i$点充电时间为$T_i$, 则$p_i$点每次电量消耗时间为$T-T_i$, 消耗电量为$w_i(T-T_i)$, 则有
+
+\begin{eqnarray}
+w_i(T-T_i) \leq rT_i 
+\end{eqnarray}
+
+即
+\begin{eqnarray}
+\frac{w_iT}{r+w_i} \leq T_i
+\end{eqnarray}

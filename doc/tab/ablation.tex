@@ -1,0 +1,29 @@
+
+\begin{table*}[t]
+    \caption{\textbf{深度估计在KITTI上的消融实验.} 
+	} 
+    \label{tab:ablation}
+    \centering
+    \scalebox{1.0}{
+    \begin{tabular}{l|cccc|ccc}
+       \toprule[2pt] 
+      & \multicolumn{4}{c|}{Error $\downarrow$} & \multicolumn{3}{c}{Accuracy $\uparrow$}  \\
+      \cline{2-8}
+      Methods & AbsRel & SqRel & RMS & RMSlog & $<1.25$ & $<1.25^2$ & $<1.25^3$ \\
+      \hline
+      Avgloss & 0.124 & 1.106 & 5.153 &0.203 & 0.863 & 0.954 & \textbf{0.981}\\
+      %$Loss_{min} + M_{id}$(Baseline\cite{Godard2019monodepth2}) & \textbf{0.115} & 0.892 & \textbf{4.785} &0.192 & 0.878 & 0.959 & 0.981\\
+      $ M_{final} = M_{id}$(monodepth2\cite{Godard2019monodepth2}) & \textbf{0.115} & 0.903 & 4.863 &0.193 &\textbf{ 0.877 }&\textbf{ 0.959} & \textbf{0.981}\\
+      $ M_{final}= M_{id} \oplus M_{var}$&\textbf{0.115} &0.888 & 4.788 & 0.192 & 0.876 & \textbf{0.959} & \textbf{0.981}\\
+      $M_{final} = M_{id} \oplus M_{m}$&0.116&0.923 & 4.845 & 0.193 & 0.875& 0.958 &\textbf{0.981}\\%real
+       $ M_{final} = M_{id} \oplus M^{*}_{m}$&\textbf{0.115}&\textbf{0.875} & 4.798 & 0.193 & 0.876 & 0.958 &\textbf{0.981}\\
+ 
+         $M_{final} =  M_{id} \oplus M_{m}^* \oplus M_{var}~ (full)$	& \textbf{0.115} & 0.878 & \textbf{4.782} &\textbf{ 0.191} &0.875&\textbf{0.959} &\textbf{ 0.981}\\
+
+
+      \toprule[2pt]
+    \footnotesize{$M_m^*$ is the inverse of $M_m$}
+    \end{tabular}
+    }
+    %  \vspace{-2mm}
+\end{table*}
