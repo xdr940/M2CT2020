@@ -4,12 +4,13 @@
 *.aux
 *.log
 *.gz
-*.jpg
-*.png
 *.ini
 *.bbl
 *.out
 *.toc
 *.mp4
 *.vsdx
+src
+submission
+submission.zip
 

@@ -14,11 +14,11 @@
 	\tableofcontents%生成目录
 	\thispagestyle{empty}%页脚不要页码
 	%“目录”两个字的样式与section的样式一致，默认居中，故将设置section标题居左放置在生成目录后
-	\CTEXsetup[format={\Large\bfseries}]{section}  %section标题居左
+	\CTEXsetup[format={\large\bfseries}]{section}  %section标题居左
 	
 	
 	
-	\input{tab/log}
+	%\input{tab/log}
 	
 	
 	
@@ -40,11 +40,13 @@
 
 	%章节内容
 	\include{data/abstract}
-	\include{data/chapter01}
-	\include{data/chapter02}
-	\include{data/chapter03}
-	\include{data/chapter04}
-	\include{data/chapter05}
+	\include{data/introduction}
+	\include{data/preliminary}
+	\include{data/method1}
+	\include{data/method2}
+	\include{data/method3}
+	\include{data/comparison}
+	\include{data/conclusion}
 
 
 	%参考文献
@@ -52,9 +54,7 @@
 	\bibliographystyle{unsrt}
 	\addcontentsline{toc}{section}{参考文献} %向目录中添加条目，以章/section的名义
 	\bibliography{ref.bib}
-	\clearpage
-
-\input{data/app}
+%\input{data/app}
 
 	\label{lastpage}%%%%显示总页数
 \end{document}

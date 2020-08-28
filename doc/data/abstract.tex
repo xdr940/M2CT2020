@@ -13,10 +13,33 @@
 {
 	\kaishu	
 	\hspace{5bp}{\zihao{-4}\textbf{【摘要】}} 
-	本文由航拍常见的任务引入伪装目标检测，并对深度估计做了简要叙述，并简单介绍了该领域常用的几个数据集，然后对几种不同的估计方法分别列举了一些重要的工作，并对精度结果进行了比较。最后回到航拍视频/深度估计的问题上，针对该问题提出了一些想法.
+	本文涉及的问题为旅行商问题,
+	针对问题1, 我们引入自组织映射网络(Self-Organizing Map,SOM), 通过竞争合作学习的方法, 求出最优路径:
+	
+	$p_{0}\rightarrow p_2\rightarrow p_1\rightarrow p_9\rightarrow p_7\rightarrow p_6\rightarrow p_{14}\rightarrow p_{11}\rightarrow p_{8}\rightarrow  p_{12}\rightarrow  p_{15}\rightarrow  p_{27}\rightarrow  p_{16}\rightarrow  p_{13}\rightarrow  p_{10}\rightarrow p_{5}\rightarrow p_{3}\rightarrow p_{4}\rightarrow p_{22}\rightarrow  p_{28}\rightarrow p_{24}\rightarrow p_{23}\rightarrow p_{21}\rightarrow p_{29}\rightarrow p_{26}\rightarrow p_{25}\rightarrow p_{18}\rightarrow p_{19}\rightarrow p_{20}\rightarrow p_{17}$
+	路径长度$l= 0.1143807$.
+	
+	针对问题2, 本文建立优化模型, 通过最小化每个结点的充电时间建模求解而得到电池电量的允许最低值的解析解.
+	针对问题3, 我们将自组织映射网络方法进一步推广, 构建四个神经元环, 将问题自然的过度到多旅行商问题(Multiple Traveling Salesmen Problem, mTSP), 并求解出四条路径为:
+	\begin{eqnarray}
+		\nonumber
+	G_A = p_0 \rightarrow p_3 \rightarrow p_{28} \rightarrow p_{24} \rightarrow p_{23} \rightarrow p_{22} \rightarrow p_{4}, \text{路径长度} l_A = 0.031713;\\ 
+	\nonumber
+	G_B = p_0  \rightarrow p_{17} \rightarrow p_{19} \rightarrow p_{29} \rightarrow p_{26} \rightarrow p_{25} \rightarrow p_{18} \rightarrow p_{20}, \text{路径长度}l_B = 0.035541;\\
+	\nonumber
+	G_C = p_{0} \rightarrow p_{1} \rightarrow  p_{9} \rightarrow  p_{7} \rightarrow  p_{6} \rightarrow  p_{14} \rightarrow  p_{11} \rightarrow   p_{7} \rightarrow  p_{2} , \text{路径长度} l_C = 0.0408157;\\
+	\nonumber
+	G_D = p_{0} \rightarrow  p_{10} \rightarrow  p_{12} \rightarrow  p_{15} \rightarrow  p_{27} \rightarrow  p_{16} \rightarrow  p_{13} \rightarrow  p_{5} , \text{路径长度} l_D = 0.028521; 
+	\end{eqnarray}
+
+	路程总计$l = l_A +l_B+l_C+l_D = 0.13659$, 详细见拓扑图\ref{fig:mtsp-solution}. 此外,对多路径下的电池容量问题, 我们借助问题2的模型, 给出了四条子路径下各自电池容量最低值的解析解, 其最大值则为整个系统可允许的电池最低容量.
+
+	最后, 为了对SOM网络性能更进一步说明, 我们将SOM模型与其变种和常见的进化算法在TSP问题公开数据集上进行了对比, 结果表明在点数较少时($N \leq 100$)时, SOM类算法优势并不明显, 当点数较多时($N \geq 100)$, SOM类的方法精度与效率明显优于其他.
+	 本文代码全部开源, 详情可见支撑材料或\url{https://github.com/xdr940/M2CT2020}
+
 	
 	\vskip 10bp
 	
 	\hspace{5bp} {\zihao{-4}\textbf{【 关键词】}} 
-	深度估计; 航拍 
+	旅行商问题(TSP), 多旅行商问题(mTSP), 自组织映射网络(SOM) 
 }

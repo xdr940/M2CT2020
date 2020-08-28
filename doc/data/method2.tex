@@ -1,0 +1,160 @@
+%chapter03
+
+\newpage
+\section{问题二的模型建立与求解}
+\label{sec:method2}
+\subsection{问题二符号说明}
+
+\begin{table}[h]
+	\begin{center}
+		\caption{问题二符号说明}
+		\begin{tabular}{l|c}
+			\toprule[2pt] 
+			    符号 & 意义 \\ \hline
+			 $i$& 传感器结点标号\\
+             $T_i$&结点i充电时间\\
+             $\bar{T}_i$&结点i放电时间\\
+             $T$&充电系统运行一个循环的时间\\
+			 $w_i$&结点i电量消耗功率\\
+			 $f$&结点电池电量底线\\
+			 $c_i$&结点电池电量\\
+			 $v$&充电车行进速度\\
+			 $r$&充电车充电功率\\
+			
+			\toprule[2pt] 
+		\end{tabular}
+		
+		\label{tab:distribution}
+		\vspace{-0.4cm}
+	\end{center}
+\end{table}
+
+
+\subsection{问题二的模型建立与求解}
+根据问题一的求解, 已经得到环路, 根据问题二题干描述, 我们可以假设到整个系统稳定时, 充电车应在该环路循环跑动, 且运行一圈时间固定不变. 在系统运行时, 电池可能的最小容量即为耗电量最大的结点, 而对于充电速率统一为$r$, 耗电量最大的结点充电时间最长的结点. 又因为所有节点的电池容量统一, 故电池容量最小应为:
+
+\begin{eqnarray}
+    c_{min} = \mathop{Max} T_i \cdot r + f
+    \label{eq:cmin}
+\end{eqnarray}
+
+其中$c_{min}$为电池最小容量, $T_i$为结点$p_i$的充电时间, $r$为充电功率, $f$为电池最低电量.
+
+上式中, 充电时间$T_i$为变量, 故可建立充电时间模型, 求出每个结点最小充电时间, 则问题解决.
+
+设数据中心为$p_0$点, 电动车跑完一轮时间为$T$, 每个结点充的电量为$c_i$, 充电车对$p_i$点充电时间为$T_i$, 则$p_i$点每个循环电量消耗时间为$\bar{T}_i = T-T_i$, 放电功率为$w_i$,故消耗电量为$w_i(T-T_i)$, 则可列方程:
+
+\begin{eqnarray}
+c_i = w_i \bar{T_i} = w_i(T-T_i)\leq rT_i 
+\end{eqnarray}
+
+将不等式移项, 将$T_i$分离出, 则有
+
+\begin{eqnarray}
+\nonumber
+\quad &\frac{w_iT}{r+w_i} \leq T_i&\\
+\nonumber
+\quad &\frac{w_i}{r+w_i} T_{r} + \frac{w_i}{r+w_i} \sum\limits_j T_j - T_i \leq 0&
+\end{eqnarray}
+
+令$\frac{w_i}{r+w_i} = a_i, \textbf{a} = [a_1, a_2, \dots a_n], ~\textbf{T} = [T_1,\dots T_i \dots T_n]$
+则上式可化为
+\begin{equation}       %开始数学环境
+    \left[                 %左括号
+      \begin{array}{cccc}   %该矩阵一共3列，每一列都居中放置
+        a_1-1 & a_2 & \dots& a_n \\  %第一行元素
+        a_1 & a_2 -1 & \dots& a_n \\  %第二行元素
+        &&\dots&\\
+        a_1&a_2&\dots&a_n-1\\
+      \end{array}
+    \right]                 %右括号
+    \left[
+        \begin{array}{cccc}
+         T_1\\
+         T_2\\
+         ... \\
+         T_{n}
+        \end{array}
+    \right ]
+    +
+    \left[
+    \begin{array}{cccc}
+     a_{1}\\
+     a_{2}\\
+     ... \\
+     a_{n}
+    \end{array}
+    \right ]
+    T_r \leq 0
+    \end{equation}
+
+  
+
+    \begin{equation}     
+        \left\{
+            \left[                 
+                \begin{array}{cccc}   
+                1 & 0 & \dots& 0 \\  
+                0 & 1  & \dots& 0 \\ 
+                &&\dots&\\
+                0&0&\dots&1\\
+                \end{array}
+            \right] 
+            -
+            \left[                 
+            \begin{array}{cccc}   
+                a_1 & a_2 & \dots& a_n \\ 
+                a_1 & a_2  & \dots& a_n \\  
+                &&\dots&\\
+                a_1&a_2&\dots&a_n\\
+            \end{array}
+            \right]    
+        \right\}   
+        \left[
+            \begin{array}{cccc}
+             T_1\\
+             T_2\\
+             ... \\
+             T_{n}
+            \end{array}
+        \right ]
+        \geq
+        \left[
+            \begin{array}{cccc}
+            a_{1}\\
+            a_{2}\\
+            ... \\
+            a_{n}
+            \end{array}
+        \right ]
+        T_r 
+        \end{equation}
+
+即
+\begin{eqnarray}
+  (\textbf{I}- \textbf{1}^T\textbf{a} )\textbf{T} \geq \textbf{a} T_r
+\end{eqnarray}
+所以
+\begin{eqnarray}
+  \textbf{T} \geq   (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} T_r
+\end{eqnarray}
+因为$T_i \geq 0$所以有:
+\begin{eqnarray}
+    \mathop{Max}T_i = \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} T_r\|_{\infty}
+\end{eqnarray}
+这里$\|\cdot\|_\infty$为无穷范数, \textbf{1}为n维全1向量. 再将$ T_r = l/v$ 带入,联合方程\ref{eq:cmin} 得到
+
+\begin{eqnarray}
+    c_{min} =r \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f
+\end{eqnarray}
+
+综上, 求得整个充电系统中电池最小容量为$ c_{min} =r \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f $
+
+
+%其中, $T = T_{charge} + T_{run}$, $T_{charge} = \sum \limits_{i} T_i  $. $T_{run} = l/v $
+
+
+
+
+
+
