@@ -13,13 +13,15 @@
 {
 	\kaishu	
 	\hspace{5bp}{\zihao{-4}\textbf{【摘要】}} 
-	本文涉及的问题为旅行商问题,
-	针对问题1, 我们引入自组织映射网络(Self-Organizing Map,SOM), 通过竞争合作学习的方法, 求出最优路径:
+	本文涉及的问题为旅行商问题以及优化问题, 我们主要通过人工神经网络方法建立模型, 求解问题.
 	
+	针对问题1, 我们引入自组织映射网络(Self-Organizing Map,SOM), 通过竞争合作学习的方法, 求出最优路径:
+
 	$p_{0}\rightarrow p_2\rightarrow p_1\rightarrow p_9\rightarrow p_7\rightarrow p_6\rightarrow p_{14}\rightarrow p_{11}\rightarrow p_{8}\rightarrow  p_{12}\rightarrow  p_{15}\rightarrow  p_{27}\rightarrow  p_{16}\rightarrow  p_{13}\rightarrow  p_{10}\rightarrow p_{5}\rightarrow p_{3}\rightarrow p_{4}\rightarrow p_{22}\rightarrow  p_{28}\rightarrow p_{24}\rightarrow p_{23}\rightarrow p_{21}\rightarrow p_{29}\rightarrow p_{26}\rightarrow p_{25}\rightarrow p_{18}\rightarrow p_{19}\rightarrow p_{20}\rightarrow p_{17}$
-	路径长度$l= 0.1143807$.
+	路径长度$l= 0.1143807$,换算成SI单位制后,$l=11.43807 km$.
 	
 	针对问题2, 本文建立优化模型, 通过最小化每个结点的充电时间建模求解而得到电池电量的允许最低值的解析解.
+	
 	针对问题3, 我们将自组织映射网络方法进一步推广, 构建四个神经元环, 将问题自然的过度到多旅行商问题(Multiple Traveling Salesmen Problem, mTSP), 并求解出四条路径为:
 	\begin{eqnarray}
 		\nonumber
@@ -32,7 +34,7 @@
 	G_D = p_{0} \rightarrow  p_{10} \rightarrow  p_{12} \rightarrow  p_{15} \rightarrow  p_{27} \rightarrow  p_{16} \rightarrow  p_{13} \rightarrow  p_{5} , \text{路径长度} l_D = 0.028521; 
 	\end{eqnarray}
 
-	路程总计$l = l_A +l_B+l_C+l_D = 0.13659$, 详细见拓扑图\ref{fig:mtsp-solution}. 此外,对多路径下的电池容量问题, 我们借助问题2的模型, 给出了四条子路径下各自电池容量最低值的解析解, 其最大值则为整个系统可允许的电池最低容量.
+	路程总计$l = l_A +l_B+l_C+l_D = 0.13659$,换算成SI单位制 $l=13.659 km$. 详细见拓扑图\ref{fig:mtsp-solution}. 此外,对多路径下的电池容量问题, 我们借助问题2的模型, 给出了四条子路径下各自电池容量最低值的解析解, 其最大值则为整个系统可允许的电池最低容量.
 
 	最后, 为了对SOM网络性能更进一步说明, 我们将SOM模型与其变种和常见的进化算法在TSP问题公开数据集上进行了对比, 结果表明在点数较少时($N \leq 100$)时, SOM类算法优势并不明显, 当点数较多时($N \geq 100)$, SOM类的方法精度与效率明显优于其他.
 	 本文代码全部开源, 详情可见支撑材料或\url{https://github.com/xdr940/M2CT2020}

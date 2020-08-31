@@ -48,7 +48,7 @@ TSP问题在1930年首次被形式化, 并且是在最优化中研究最深入�
         \label{fig:init}
   \end{figure}
   我们通过建立的som-TSP模型,对问题进行求解\footnote{som-TSP模型代码见支撑材料或\url{https://github.com/xdr940/som-TSP}}. 模型网络设为单层, 输出层共计210个神经元, 初始化神经环为圆形, 包裹所有点,如图\ref{fig:init}. 
-模型共计迭代5000次, 每100次评估一次,评估指标为当前神经环解算出的回路总距离, 并将每次最好的结果保存. som-TSP模型求解时间在Intel I7 8700K上共计4.9s, 在第2500 次迭代中求出的最优路径, 如图\ref{fig:solution}, 长度为$L=0.1143807$, 路径为:
+模型共计迭代5000次, 每100次评估一次,评估指标为当前神经环解算出的回路总距离, 并将每次最好的结果保存. som-TSP模型求解时间在Intel I7 8700K上共计4.9s, 在第2500 次迭代中求出的最优路径, 如图\ref{fig:solution}, 长度为$L=0.1143807$, 换算后为$l = 11.43807km$. 路径为:
 
 $p_{0}\rightarrow p_2\rightarrow p_1\rightarrow p_9\rightarrow p_7\rightarrow p_6\rightarrow p_{14}\rightarrow p_{11}\rightarrow p_{8}\rightarrow  p_{12}\rightarrow  p_{15}\rightarrow  p_{27}\rightarrow  p_{16}\rightarrow  p_{13}\rightarrow  p_{10}\rightarrow p_{5}\rightarrow p_{3}\rightarrow p_{4}\rightarrow p_{22}\rightarrow  p_{28}\rightarrow p_{24}\rightarrow p_{23}\rightarrow p_{21}\rightarrow p_{29}\rightarrow p_{26}\rightarrow p_{25}\rightarrow p_{18}\rightarrow p_{19}\rightarrow p_{20}\rightarrow p_{17}$
 

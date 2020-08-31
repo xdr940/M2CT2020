@@ -13,7 +13,7 @@
 
 \noindent{\textbf{问题初始化}}\\
 
-在问题2的模型建立中, 我们参考文献\cite{isom2008}初始化神经元环形状,并迭代. 本问题中为四个旅行商的mTSP, 则需要四个神经元环, 我们这里定义为$R_A,R_B,R_C,R_D$. 同问题一(Sec.\ref{sec:method1})一样, 神经元环对应的权值向量对应着2维空间坐标, 可视化如图\ref{fig:init-mtsp}
+在问题2的模型建立中, 我们参考文献\cite{isom2008}初始化神经元环形状,并迭代. 本问题中为四个旅行商的mTSP, 则需要四个神经元环, 我们这里定义为$R_A,R_B,R_C,R_D$. 同问题一(Sec.\ref{sec:method1})一样, 神经元环对应的权值向量对应着2维空间坐标, 可视化如图\ref{fig:init2}
 \begin{figure}[h]
     \begin{center}
         \includegraphics[width=0.55\linewidth]{fig/init2}
@@ -61,21 +61,19 @@ som-mTSP模型求解时间在Intel I7 8700K上共计5.6s, 求解过程以及结�
 最终, 模型在迭代2200次时找到最优解,四条路径分别是:
 \begin{eqnarray}
     \nonumber
-    p_0 \rightarrow p_5 \rightarrow p_{13} \rightarrow p_{16} \rightarrow p_{27} \rightarrow p_{15} \rightarrow p_{12} \rightarrow p_{10}\\
+   A: p_0 \rightarrow p_5 \rightarrow p_{13} \rightarrow p_{16} \rightarrow p_{27} \rightarrow p_{15} \rightarrow p_{12} \rightarrow p_{10}, l_A=0.0317137\\
     \nonumber
-    p_0 \rightarrow p_{4} \rightarrow p_{21} \rightarrow p_{22} \rightarrow p_{23} \rightarrow p_{24} \rightarrow p_{28} \rightarrow p_{3}\\
+  B:  p_0 \rightarrow p_{4} \rightarrow p_{21} \rightarrow p_{22} \rightarrow p_{23} \rightarrow p_{24} \rightarrow p_{28} \rightarrow p_{3}, l_B=0.0355413\\
     \nonumber
-    p_{0} \rightarrow p_{20} \rightarrow p_{18} \rightarrow p_{25} \rightarrow p_{26} \rightarrow p_{29} \rightarrow p_{19} \rightarrow p_{17}\\
+   C: p_{0} \rightarrow p_{20} \rightarrow p_{18} \rightarrow p_{25} \rightarrow p_{26} \rightarrow p_{29} \rightarrow p_{19} \rightarrow p_{17}, l_B=0.0408157\\
     \nonumber
-    p_{0}\rightarrow p_{1}\rightarrow p_{9}  \rightarrow p_{7} \rightarrow p_{6} \rightarrow p_{14} \rightarrow p_{11} \rightarrow p_{8} \rightarrow p_{2}
+    D: p_{0}\rightarrow p_{1}\rightarrow p_{9}  \rightarrow p_{7} \rightarrow p_{6} \rightarrow p_{14} \rightarrow p_{11} \rightarrow p_{8} \rightarrow p_{2}, l_D=0.028521
 \end{eqnarray}
 距离分别为
 \begin{eqnarray}
-    \nonumber
-    &l_A=0.0317137,~~l_B=0.0355413,~~l_C=0.0408157,~~l_D=0.028521&\\
     &l = l_A+l_B+l_C+l_D = 0.136592&
 \end{eqnarray}
-
+$l$根据模型假设, 换算为$l= 13.6592$km
 %并添加约束, 即每个神经环$R_k$求解出的环路$G_k$必须包含一个仓库点.. 
 
 \begin{figure}[h]
@@ -104,7 +102,7 @@ som-mTSP模型求解时间在Intel I7 8700K上共计5.6s, 求解过程以及结�
 \begin{eqnarray}
     c^k_{min} =r \| (\textbf{I}_k- \textbf{1}^T\textbf{a}^k )^{-1}\textbf{a}^k \frac{l^k}{v}\|_{\infty} +f ,~~k \in \{A,B,C,D\}
 \end{eqnarray}
-这里$\textbf{a} = [a_1, a_2, \dots a_n],~ a_i = \frac{w_i}{r+w_i}$, 且$l^k$根据som-mTSP模型已经以分别求出, 故整个系统的电池最小容量为:
+这里$\textbf{a} = [a_1, a_2, \dots a_n],~ a_i = \frac{w_i}{r+w_i}$,$|\cdot|_\infty$ 为无穷范数, $l^k$根据som-mTSP模型已经以分别求出, 故整个系统的电池最小容量为:
 \begin{eqnarray}
     c_{min} = \mathop{Max}\{c^A,c^B, c^C,c^D\}
 \end{eqnarray}

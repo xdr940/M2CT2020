@@ -15,11 +15,13 @@
              $T_i$&结点i充电时间\\
              $\bar{T}_i$&结点i放电时间\\
              $T$&充电系统运行一个循环的时间\\
+             $T_r$&不算充电时间, 充电车行进的时间\\
 			 $w_i$&结点i电量消耗功率\\
 			 $f$&结点电池电量底线\\
 			 $c_i$&结点电池电量\\
 			 $v$&充电车行进速度\\
-			 $r$&充电车充电功率\\
+             $r$&充电车充电功率\\
+			 $N$&充电结点个数\\
 			
 			\toprule[2pt] 
 		\end{tabular}
@@ -54,26 +56,26 @@ c_i = w_i \bar{T_i} = w_i(T-T_i)\leq rT_i
 \nonumber
 \quad &\frac{w_iT}{r+w_i} \leq T_i&\\
 \nonumber
-\quad &\frac{w_i}{r+w_i} T_{r} + \frac{w_i}{r+w_i} \sum\limits_j T_j - T_i \leq 0&
+\quad &\frac{w_i}{r+w_i} T_{r} + \frac{w_i}{r+w_i} \sum\limits_{j\neq i } T_j - T_i \leq 0,~~ i =0,1,2,\dots N&
 \end{eqnarray}
-
-令$\frac{w_i}{r+w_i} = a_i, \textbf{a} = [a_1, a_2, \dots a_n], ~\textbf{T} = [T_1,\dots T_i \dots T_n]$
+这里, $T_r$为充电车不算充电, 行走的时间; $N$为所有结点个数
+令$\frac{w_i}{r+w_i} = a_i, \textbf{a} = [a_1, a_2, \dots a_N], ~\textbf{T} = [T_0,\dots T_i \dots T_N]$
 则上式可化为
 \begin{equation}       %开始数学环境
     \left[                 %左括号
       \begin{array}{cccc}   %该矩阵一共3列，每一列都居中放置
-        a_1-1 & a_2 & \dots& a_n \\  %第一行元素
-        a_1 & a_2 -1 & \dots& a_n \\  %第二行元素
+        a_1-1 & a_2 & \dots& a_N \\  %第一行元素
+        a_1 & a_2 -1 & \dots& a_N \\  %第二行元素
         &&\dots&\\
-        a_1&a_2&\dots&a_n-1\\
+        a_1&a_2&\dots&a_N-1\\
       \end{array}
     \right]                 %右括号
     \left[
         \begin{array}{cccc}
+         T_0\\
          T_1\\
-         T_2\\
          ... \\
-         T_{n}
+         T_{N}
         \end{array}
     \right ]
     +
@@ -82,10 +84,10 @@ c_i = w_i \bar{T_i} = w_i(T-T_i)\leq rT_i
      a_{1}\\
      a_{2}\\
      ... \\
-     a_{n}
+     a_{N}
     \end{array}
     \right ]
-    T_r \leq 0
+    T_r \leq \textbf{0}_N
     \end{equation}
 
   
@@ -112,8 +114,8 @@ c_i = w_i \bar{T_i} = w_i(T-T_i)\leq rT_i
         \right\}   
         \left[
             \begin{array}{cccc}
+             T_0\\
              T_1\\
-             T_2\\
              ... \\
              T_{n}
             \end{array}
@@ -130,25 +132,25 @@ c_i = w_i \bar{T_i} = w_i(T-T_i)\leq rT_i
         T_r 
         \end{equation}
 
-即
+其中, $\textbf{0}_N$为N维零向量. 上式可化为:
 \begin{eqnarray}
   (\textbf{I}- \textbf{1}^T\textbf{a} )\textbf{T} \geq \textbf{a} T_r
 \end{eqnarray}
 所以
 \begin{eqnarray}
-  \textbf{T} \geq   (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} T_r
+  \textbf{T} \geq   (\textbf{I}- \textbf{1}_N^T\textbf{a} )^{-1}\textbf{a} T_r
 \end{eqnarray}
 因为$T_i \geq 0$所以有:
 \begin{eqnarray}
-    \mathop{Max}T_i = \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} T_r\|_{\infty}
+    \mathop{Max}T_i = \| (\textbf{I}- \textbf{1}_N^T\textbf{a} )^{-1}\textbf{a} T_r\|_{\infty}
 \end{eqnarray}
-这里$\|\cdot\|_\infty$为无穷范数, \textbf{1}为n维全1向量. 再将$ T_r = l/v$ 带入,联合方程\ref{eq:cmin} 得到
+这里$\|\cdot\|_\infty$为无穷范数, 用来求分量中最大项; $\textbf{1}_N$为N维全1向量. 再将$ T_r = l/v$ 带入,联合方程\ref{eq:cmin} 得到
 
 \begin{eqnarray}
-    c_{min} =r \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f
+    c_{min} =r \| (\textbf{I}- \textbf{1}_N^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f
 \end{eqnarray}
 
-综上, 求得整个充电系统中电池最小容量为$ c_{min} =r \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f $
+综上, 求得整个充电系统中电池最小容量为$ c_{min} =r \| (\textbf{I}- \textbf{1}^T\textbf{a} )^{-1}\textbf{a} \frac{l}{v}\|_{\infty} +f $. 另外, 考虑数据中心结点处充电车停留时间为0, 计算时要将$T_0 = 0$带入计算.
 
 
 %其中, $T = T_{charge} + T_{run}$, $T_{charge} = \sum \limits_{i} T_i  $. $T_{run} = l/v $
